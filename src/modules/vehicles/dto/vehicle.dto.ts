@@ -1,49 +1,56 @@
-import { applyIsOptionalDecorator } from "@nestjs/mapped-types";
-import { ApiProperty, PartialType } from "@nestjs/swagger";
-import { IsInt, IsNumber, IsOptional, IsPositive, IsString, MinLength } from "class-validator";
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import {
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsPositive,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateVehicleDto {
-    @IsOptional()
-    @IsNumber()
-    @ApiProperty()
-    id?: number;
+  @IsInt()
+  @IsPositive()
+  @IsNotEmpty()
+  @ApiProperty()
+  model_id: number;
 
-    @IsNumber()
-    @ApiProperty()
-    model_id?:number;
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(3)
+  @ApiProperty()
+  vin: string;
 
-    @IsString()
-    @MinLength(3)
-    @ApiProperty()
-    @IsInt()
-    vin?:string;
+  @IsInt()
+  @IsPositive()
+  @IsNotEmpty()
+  @ApiProperty()
+  year: number;
 
-    @ApiProperty()
-    @IsOptional()
-    @IsPositive()
-    year:number;
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(3)
+  @ApiProperty()
+  color: string;
 
-    @ApiProperty()
-    @IsString()
-    @MinLength(3)
-    color:string;
+  @IsInt()
+  @IsPositive()
+  @IsOptional()
+  @ApiProperty()
+  mileage?: number;
 
-    @IsOptional()
-    @IsInt()    
-    @ApiProperty()
-    @IsPositive()
-    mileage:number;
+  @IsNumber()
+  @IsPositive()
+  @IsNotEmpty()
+  @ApiProperty()
+  price: number;
 
-    @IsOptional()
-    @IsNumber()
-    @ApiProperty()
-    @IsPositive()
-    price:number;
-
-    @ApiProperty()
-    @IsString()
-    @MinLength(3)
-    status:string;
-
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(3)
+  @ApiProperty()
+  status: string;
 }
+
 export class UpdateVehicleDto extends PartialType(CreateVehicleDto) {}
