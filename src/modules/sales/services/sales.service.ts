@@ -18,9 +18,8 @@ export class SalesService {
 
     async findAll(): Promise<Sale[]> {
         return this.salesRepository.find({
-            withDeleted: true,           // ← Muestra todos los registros
+            withDeleted: true,      
             order: { created_at: 'DESC' },
-            // relations: ['customer', 'vehicle'] // descomenta si las necesitas
         });
     }
     
@@ -30,9 +29,8 @@ export class SalesService {
     const sale = await this.salesRepository.findOne({
             where: { 
             id: id,
-            // deleted_at: IsNull()   // ← Comenta o quita esta línea si quieres ver registros eliminados
             },
-            withDeleted: true,           // ← Esta es la clave
+            withDeleted: true,
         });
 
         console.log('Resultado de la consulta:', sale);
@@ -43,7 +41,11 @@ export class SalesService {
 
         return sale;
         }
-
+    async update(id: number, updateSaleDto: CreateSaleDto): Promise<Sale> {
+        const sale = await this.findOne(id);
+        Object.assign(sale, updateSaleDto);
+        return this.salesRepository.save(sale);
+    }
     async remove(id: number): Promise<void> {
         const sale = await this.findOne(id);
         await this.salesRepository.remove(sale);

@@ -3,6 +3,7 @@ import { VehiclesModule } from './modules/vehicles/vehicles.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SalesModule } from './modules/sales/sales.module';
+import { CostumersModule } from './modules/costumers/costumers.module';
 
 @Module({
   imports: [VehiclesModule,ConfigModule.forRoot(),
@@ -16,7 +17,8 @@ import { SalesModule } from './modules/sales/sales.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    SalesModule
+    SalesModule,
+    CostumersModule
   ],
 })
 export class AppModule {}
