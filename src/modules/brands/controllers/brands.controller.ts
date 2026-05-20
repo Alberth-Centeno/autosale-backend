@@ -20,7 +20,7 @@ export class BrandsController {
         return this.brandsService.findAll();
     }
     @Get(':id')
-    FindOne(@Param('id', ParseIntPipe) id: number) {
+    findOne(@Param('id', ParseIntPipe) id: number) {
         return this.brandsService.findOne(id);
     }
     

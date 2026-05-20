@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { VehiclesModule } from './modules/vehicles/vehicles.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SalesModule } from './modules/sales/sales.module';
+
 @Module({
   imports: [VehiclesModule,ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
@@ -13,7 +15,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true,
-    })
+    }),
+    SalesModule
   ],
 })
 export class AppModule {}
