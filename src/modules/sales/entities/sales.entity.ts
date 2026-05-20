@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Costumer } from "../../costumers/entities/costumers.entity";
 
 @Entity('sales')
 export class Sale {
@@ -22,4 +23,11 @@ export class Sale {
 
     @DeleteDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     deleted_at: Date;
+
+    @ManyToOne(() => Costumer, (costumer) => costumer.sales, { 
+        nullable: false,
+        onDelete: 'RESTRICT'   
+    })
+    @JoinColumn({ name: 'customer_id' })  
+    customer: Costumer;
 }
