@@ -4,6 +4,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SalesModule } from './modules/sales/sales.module';
 import { CostumersModule } from './modules/costumers/costumers.module';
+import { AuthModule } from './modules/auth/auth.modules';
+import { BrandsModule } from './modules/brands/brands.module';
+import { ModelsModule } from './modules/models/models.module';
 
 @Module({
   imports: [VehiclesModule,ConfigModule.forRoot(),
@@ -18,7 +21,11 @@ import { CostumersModule } from './modules/costumers/costumers.module';
       synchronize: true,
     }),
     SalesModule,
-    CostumersModule
+    CostumersModule,
+    AuthModule,
+    BrandsModule,
+    CostumersModule,
+    ModelsModule
   ],
 })
 export class AppModule {}
